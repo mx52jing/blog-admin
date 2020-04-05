@@ -1,0 +1,26 @@
+.login-wrapper {
+    height: 100vh;
+    background-color: #001529;
+    position: relative;
+    .login-content {
+        background-color: #f0f0f0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        padding: 60px  30px;
+    }
+    .ant-form {
+        width: 300px;
+        .form-item-btn {
+            margin-bottom: 0;
+        }
+        .login-form-btn {
+            width: 100%;
+        }
+    }
+}
