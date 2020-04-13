@@ -20,7 +20,7 @@ const AddArticle = props => {
 			<Form
 				onFinish={onFinish}>
 				<Row>
-					<Col span={6}>
+					<Col span={11}>
 						<Item
 							name='article_title'
 							rules={[{ required: true, message: '请输入文章标题' }]}>
@@ -29,21 +29,13 @@ const AddArticle = props => {
 								placeholder="请输入文章标题"/>
 						</Item>
 					</Col>
-					<Col span={6} offset={1}>
+					<Col span={12} offset={1}>
 						<Item
 							name='article_category'
 							rules={[{ required: true, message: '请选择文章分类' }]}>
 							<Select
 								placeholder='请选择文章分类'
 								size='large'/>
-						</Item>
-					</Col>
-					<Col span={6} offset={1}>
-						<Item
-							name='article_tag'>
-							<Input
-								size='large'
-								placeholder="请输入文章标签(多个标签以,分割)"/>
 						</Item>
 					</Col>
 				</Row>
