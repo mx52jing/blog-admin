@@ -1,12 +1,11 @@
 import React, { memo } from 'react'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import { Layout, Breadcrumb } from 'antd'
 import AddArticle from '../AddArticle'
 
 import './index.scss'
 
 const { Header, Content, Footer } = Layout
-const { SubMenu } = Menu
 
 const HomeRight = props => {
 	const { path, url } = useRouteMatch()
@@ -21,9 +20,8 @@ const HomeRight = props => {
 				</Breadcrumb>
 				<div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
 					<Switch>
-						<Route to={`${url}/articles`} component={AddArticle}/>
+						<Route path='/admin/article' component={AddArticle}/>
 					</Switch>
-					{/*<AddArticle />*/}
 				</div>
 			</Content>
 			<Footer style={{ textAlign: 'center' }}>哈撒Q博客后台系统</Footer>

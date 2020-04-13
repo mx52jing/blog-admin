@@ -8,7 +8,7 @@ const Home = Loadable(() => import('@pages/Home'))
 const AppComponent = () => (
 	<Router>
 		<Switch>
-			<Route exact path="/" component={Home}/>
+			<Route path="/admin" component={Home}/>
 			<Route path="/login" component={Login}/>
 		</Switch>
 	</Router>

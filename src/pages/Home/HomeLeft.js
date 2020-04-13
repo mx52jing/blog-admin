@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from 'react'
-import { Link, Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Link, useRouteMatch, useHistory } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import {
 	FolderOutlined,
@@ -16,6 +16,9 @@ const HomeLfet = props => {
 	const onCollapse = useCallback(collapsed => {
 		setCollapsed(collapsed)
 	}, [])
+	const handleClick = useCallback((item, key) => {
+		console.log(item, key);
+	}, [])
 	return (
 		<Sider
 			collapsible
@@ -23,6 +26,7 @@ const HomeLfet = props => {
 			onCollapse={onCollapse}>
 			<div className="logo">哈撒Q博客管理后台</div>
 			<Menu
+				onClick={handleClick}
 				theme="dark"
 				defaultSelectedKeys={['399']}
 				mode="inline">
