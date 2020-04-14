@@ -5,7 +5,7 @@ import HomeRight from './HomeRight'
 
 import './index.scss'
 
-const Home = props => {
+const Home = () => {
 	return (
 		<Layout className="layout-wrapper">
 			<HomeLeft/>
