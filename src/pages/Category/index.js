@@ -1,18 +1,57 @@
-import React, { memo, useState } from 'react'
-import { Input, Button, Empty } from 'antd'
+import React, { memo, useState, useEffect, useCallback } from 'react'
+import { Input, Button, Empty, message } from 'antd'
 import TagItem from './TagItem'
+import { fetchCategories, addCategory } from '@api/request'
 
 import './index.scss'
 
 const Category = () => {
-    const arr = [...Array(20).keys()].map(item => ({ name: `我是第${item}个标签`, id: item + 1 }))
-    const [categories, handleCategories] = useState(arr)
+    const [categories, handleCategories] = useState([]),
+		[categoryName, handleCategoryName] = useState('')
+    useEffect(() => {
+		fetchCategory()
+    }, [])
+	/* input change 事件 */
+	const handleChange = useCallback((event) => {
+		const { value } = event.target
+		handleCategoryName(value)
+	}, [])
+	/* 添加按钮事件 */
+	const handleAddCategory = useCallback(() => {
+		if(!categoryName) {
+			message.error('分类名称不能为空')
+		}
+		addCategory({ name: categoryName })
+			.then(({ result }) => {
+                message.success(result)
+				fetchCategory()
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	}, [categoryName])
+    /* 请求分类数据 */
+    const fetchCategory = useCallback(() => {
+		fetchCategories()
+            .then(({ result }) => {
+				handleCategories(result)
+			})
+            .catch(err => {
+				console.log(err);
+			})
+    }, [])
     return (
         <div className="category-wrapper">
             <div className="add-wrapper">
                 <Input
+					value={categoryName}
+					onChange={handleChange}
                     placeholder="请输入分类名称"/>
-                <Button type="primary">添加分类</Button>
+                <Button
+					onClick={handleAddCategory}
+                    type="primary">
+                    添加分类
+                </Button>
             </div>
             <div className="category-content">
                 {
@@ -20,6 +59,7 @@ const Category = () => {
                         categories.map(item => (
                             <TagItem
                                 key={item.name}
+								fetchCategory={fetchCategory}
                                 {...item} />
                         ))
                     ) : (

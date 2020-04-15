@@ -10,6 +10,7 @@ const AppComponent = () => (
 		<Switch>
 			<Route path="/admin" component={Home}/>
 			<Route path="/login" component={Login}/>
+			<Redirect to='/admin' />
 		</Switch>
 	</Router>
 )

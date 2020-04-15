@@ -1,10 +1,11 @@
 import React, { memo, useCallback, useState, useMemo } from 'react'
 import { Input, Tag, Modal, Popconfirm, message } from 'antd'
 import { EditOutlined, CloseOutlined } from '@ant-design/icons'
+import { deleteCategory } from '@api/request'
 
 const colors = ['#f50', '#2db7f5', '#87d068', '#108ee9', '#13c2c2', '#fa8c16', '#8959cc', '#fa541c', '#4764da']
 
-const TagItem = ({ name, id }) => {
+const TagItem = ({ name, _id, fetchCategory }) => {
     const [categoryVal, handleSetCategory] = useState(name),
         [showEditModal, handleShowEditModal] = useState(false)
     const categoryColor = useMemo(() => colors[Math.floor(Math.random() * 9)], [])
@@ -16,10 +17,16 @@ const TagItem = ({ name, id }) => {
         if(!categoryVal) {
             return message.error('分类名称不能为空')
         }
-        console.log(categoryVal, id);
     }, [categoryVal])
     const handleDelete = useCallback(() => {
-        console.log(id);
+		deleteCategory({ id: _id })
+            .then(({ result }) => {
+                message.success(result)
+                fetchCategory && fetchCategory()
+            })
+            .catch(err => {
+				console.log(err);
+			})
     }, [])
     return (
         <>
@@ -33,7 +40,7 @@ const TagItem = ({ name, id }) => {
                 </Popconfirm>
             </Tag>
             <Modal
-                width={300}
+                w_idth={300}
                 closable={false}
                 className='category-edit-modal'
                 centered

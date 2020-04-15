@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useRouteMatch, useLocation } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import {
 	FolderOutlined,
@@ -11,7 +11,8 @@ const { Sider } = Layout
 const { SubMenu } = Menu
 
 const HomeLfet = props => {
-	const history = useHistory()
+	const history = useHistory(),
+		{ pathname } = useLocation()
 	const [collapsed, setCollapsed] = useState(false)
 	const onCollapse = useCallback(collapsed => {
 		setCollapsed(collapsed)
@@ -28,7 +29,7 @@ const HomeLfet = props => {
 			<Menu
 				onClick={handleClick}
 				theme='dark'
-				defaultSelectedKeys={['/admin']}
+				defaultSelectedKeys={[pathname]}
 				mode='inline'>
 				<Menu.Item key='/admin'>
 					<HomeOutlined/>
