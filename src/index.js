@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ConfigProvider } from 'antd'
+import zhCN from 'antd/es/locale/zh_CN';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+    <ConfigProvider locale={zhCN}>
+        <App/>
+    </ConfigProvider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

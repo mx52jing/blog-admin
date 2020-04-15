@@ -1,0 +1,30 @@
+.category-wrapper {
+    .add-wrapper {
+        display: flex;
+        .ant-input {
+            flex: 0 0 300px;
+            margin-right: 5px;
+        }
+    }
+    .category-content {
+        padding-top: 30px;
+        .ant-tag {
+            margin: 0 15px 15px 0;
+            padding: 6px 8px;
+            cursor: pointer;
+        }
+        .category-name {
+            margin-right: 5px;
+        }
+    }
+}
+.category-edit-modal {
+    .ant-modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ant-modal-footer {
+        text-align: center;
+    }
+}
