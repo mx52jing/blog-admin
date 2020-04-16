@@ -32,11 +32,4 @@ instance.interceptors.response.use(
 	}
 )
 
-const requestObj = {},
-	fetchMethods = ['get', 'post', 'put', 'delete']
-fetchMethods.forEach(item => {
-	requestObj[item] = opt => instance[item](opt)
-})
-
-console.log(requestObj);
 export default instance

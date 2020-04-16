@@ -1,12 +1,12 @@
 import React, { memo, useState, useEffect, useCallback } from 'react'
 import { Input, Button, Empty, message } from 'antd'
 import TagItem from './TagItem'
-import { fetchCategories, addCategory } from '@api/request'
+import { getData, postData } from '@api/request'
 
 import './index.scss'
 
 const Category = () => {
-    const [categories, handleCategories] = useState([]),
+	const [categories, handleCategories] = useState([]),
 		[categoryName, handleCategoryName] = useState('')
     useEffect(() => {
 		fetchCategory()
@@ -19,11 +19,12 @@ const Category = () => {
 	/* 添加按钮事件 */
 	const handleAddCategory = useCallback(() => {
 		if(!categoryName) {
-			message.error('分类名称不能为空')
+			return message.error('分类名称不能为空')
 		}
-		addCategory({ name: categoryName })
+		postData('/categories', { name: categoryName })
 			.then(({ result }) => {
                 message.success(result)
+				handleCategoryName('')
 				fetchCategory()
 			})
 			.catch(err => {
@@ -32,7 +33,7 @@ const Category = () => {
 	}, [categoryName])
     /* 请求分类数据 */
     const fetchCategory = useCallback(() => {
-		fetchCategories()
+		getData('/categories')
             .then(({ result }) => {
 				handleCategories(result)
 			})

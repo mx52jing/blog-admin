@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
-import { Layout, Breadcrumb } from 'antd'
+import { Layout } from 'antd'
 import HomeContent from './HomeContent'
 import AddArticle from '../AddArticle'
 import ArticleList from '../ArticleList'
@@ -8,7 +8,7 @@ import Category from '../Category'
 
 import './index.scss'
 
-const { Header, Content, Footer } = Layout
+const { Content, Footer } = Layout
 
 const HomeRight = props => {
 	const { path } = useRouteMatch()

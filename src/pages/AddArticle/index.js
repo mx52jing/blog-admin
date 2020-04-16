@@ -1,16 +1,35 @@
 import React, { memo, useCallback, useState } from 'react'
-import { Row, Col, Input, Select, Form, Button } from 'antd'
+import { Row, Col, Input, Form, Button, message } from 'antd'
 import MarkdownTpl from '@components/MarkdownTpl'
+import MuiSelect from '@components/MuiSelect'
+import { postData } from "@api/request";
 
 import './index.scss'
 
 const { Item } = Form,
 	{ TextArea } = Input
 
-const AddArticle = props => {
+const AddArticle = ({ resetFields }) => {
 	const [articleContent, setArticleContent] = useState('')
 	const onFinish = useCallback(values => {
-		console.log(values);
+		const {
+				title,
+				category,
+				content,
+			} = values,
+			data = {
+				title,
+				category,
+				content
+			}
+		postData('/articles', data)
+			.then(res => {
+                message.success(res.result)
+				resetFields && resetFields()
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}, [])
 	const handleTextAreaChange = useCallback(event => {
 		setArticleContent(event.target.value)
@@ -22,7 +41,7 @@ const AddArticle = props => {
 				<Row>
 					<Col span={11}>
 						<Item
-							name='article_title'
+							name='title'
 							rules={[{ required: true, message: '请输入文章标题' }]}>
 							<Input
 								size='large'
@@ -31,9 +50,13 @@ const AddArticle = props => {
 					</Col>
 					<Col span={12} offset={1}>
 						<Item
-							name='article_category'
+							name='category'
 							rules={[{ required: true, message: '请选择文章分类' }]}>
-							<Select
+							<MuiSelect
+								isAsync
+								apiUrl='/categories'
+								allowClear
+								mode='multiple'
 								placeholder='请选择文章分类'
 								size='large'/>
 						</Item>
@@ -42,7 +65,7 @@ const AddArticle = props => {
 				<Row>
 					<Col span={11}>
 						<Item
-							name='article_content'
+							name='content'
 							rules={[{ required: true, message: '请输入文章内容' }]}>
 							<TextArea
 								onChange={handleTextAreaChange}
