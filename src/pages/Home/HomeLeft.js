@@ -25,7 +25,7 @@ const HomeLfet = props => {
 			collapsible
 			collapsed={collapsed}
 			onCollapse={onCollapse}>
-			<div className='logo'>哈撒Q博客管理后台</div>
+			{/*<div className='logo'>哈撒Q博客管理后台</div>*/}
 			<Menu
 				onClick={handleClick}
 				theme='dark'
