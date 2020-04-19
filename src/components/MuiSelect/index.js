@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react'
-import { Select } from 'antd'
+import { Select, Spin } from 'antd'
 import { getData } from '@api/request'
 
 const { Option } = Select
@@ -10,8 +10,10 @@ const MuiSelect = props => {
 		optionData,
 		apiUrl,
 		apiParams,
+		requestOpt,
 		responseDataKey,
 		labelKey,
+		notFoundContent,
 		...rest
 	} = props
 	const [options, handleOptions] = useState(optionData)
@@ -21,7 +23,7 @@ const MuiSelect = props => {
 		}
 	}, [])
 	const getOptionData = useCallback(() => {
-		getData(apiUrl, apiParams)
+		getData(apiUrl, apiParams, requestOpt)
 			.then(res => {
 				const data = res[responseDataKey]
 				handleOptions(data)
@@ -33,6 +35,7 @@ const MuiSelect = props => {
 	return (
 		<Select
 			{...rest}
+			notFoundContent={notFoundContent}
 			onDropdownVisibleChange={onDropdownVisibleChange}>
 			{
 				options.map(item => (
@@ -52,7 +55,9 @@ MuiSelect.defaultProps = {
 	apiUrl: null, // 下拉请求路径
 	apiParams: {}, // 下拉请求参数
 	responseDataKey: 'result', // 获取数据的字段
-	labelKey: 'name' // 下拉展示的字段key
+	labelKey: 'name', // 下拉展示的字段key
+	requestOpt: {},
+	notFoundContent: <Spin size="small" />
 }
 
 

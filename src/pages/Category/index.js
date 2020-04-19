@@ -33,7 +33,7 @@ const Category = () => {
     /* 请求分类数据 */
     const fetchCategory = useCallback(() => {
 		getData('/categories')
-            .then(({ result }) => {
+            .then(({ result = [] }) => {
 				handleCategories(result)
 			})
             .catch(err => {

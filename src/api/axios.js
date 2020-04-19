@@ -19,6 +19,10 @@ export default function (opt = {}) {
 	instance.interceptors.request.use(
 		config => {
 			isLoading && Loading.show()
+            if(!['/login'].includes(config.url)) {
+				const token = localStorage.getItem('token')
+				config.headers.Authorization = `Bearer ${token}`
+			}
 			return config
 		},
 		error => {
@@ -31,12 +35,19 @@ export default function (opt = {}) {
 		response => {
 			isLoading && Loading.hide()
 			const { data = {} } = response,
-				{ result } = data
+				{ err_msg, result, err_no } = data
 			if (Object.prototype.toString.call(result) === '[object String]') {
 				message.success({
 					content: result,
 					duration: 1.2
 				})
+			}
+			if(!!err_msg) {
+				message.error(err_msg)
+			}
+			console.log(err_no);
+			if(+err_no === 401) {
+				// history.replace('/login')
 			}
 			return data
 		},

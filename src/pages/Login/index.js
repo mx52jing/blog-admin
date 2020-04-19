@@ -1,26 +1,38 @@
 import React, { memo, useCallback } from 'react'
-import { Form, Input, Button } from 'antd'
+import { useHistory } from 'react-router-dom'
+import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { login } from '@api/request'
 
 import './index.scss'
 
 const { Item } = Form
 
 const Login = props => {
+	const history = useHistory()
 	const onFinish = useCallback(values => {
-		console.log('Success:', values)
+		login(values)
+			.then(res => {
+				const { result } = res,
+					{ token } = result
+				if(!!token) {
+					localStorage.setItem('token', token)
+					message.success({ content: '登录成功', duration: 1.2 })
+					history.replace('/admin')
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			})
 	}, [])
 
-	const onFinishFailed = useCallback(errorInfo => {
-		console.log('Failed:', errorInfo)
-	}, [])
 	return (
 		<div className="login-wrapper">
 			<div className="login-content">
+				<div className="title">哈萨Q博客管理后台</div>
 				<Form
 					name="login_form"
 					onFinish={onFinish}
-					onFinishFailed={onFinishFailed}
 				>
 					<Item
 						name="username"

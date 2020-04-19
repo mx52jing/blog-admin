@@ -22,7 +22,6 @@ const HomeLfet = () => {
 	const handleClick = useCallback(({ item, key }) => {
 		history.push(key)
 	}, [])
-	console.log(useLocation());
 	return (
 		<Sider
 			collapsible

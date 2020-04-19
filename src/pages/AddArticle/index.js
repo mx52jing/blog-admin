@@ -52,7 +52,7 @@ const AddArticle = () => {
 			.then(res => {
 				resetFields && resetFields()
                 setArticleContent('')
-				isEdit && history.replace('/adming/articleList')
+				isEdit && history.replace('/admin/articleList')
 			})
 			.catch(err => {
 				console.log(err);
@@ -89,6 +89,7 @@ const AddArticle = () => {
 								apiUrl='/categories'
 								allowClear
 								mode='multiple'
+								requestOpt={{ isLoading: false }}
 								placeholder='请选择文章分类'
 								size='large'/>
 						</Item>
