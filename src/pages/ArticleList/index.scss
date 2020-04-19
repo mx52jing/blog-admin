@@ -1,0 +1,35 @@
+.article-list-wrapper {
+    .operation-btns {
+        button {
+            margin-right: 10px;
+        }
+    }
+}
+
+.article-modal__delete {
+    .ant-modal-body {
+        text-align: center;
+    }
+    .ant-modal-confirm-btns {
+        float: none;
+        margin: 24px auto 0;
+    }
+}
+
+.article-modal__preview {
+    .ant-modal-content {
+        min-height: 750px;
+    }
+    .ant-modal-confirm-content {
+        min-height: 660px;
+        max-height: 760px;
+        overflow-y: auto;
+    }
+    .ant-modal-confirm-btns {
+        float: none;
+        text-align: center;
+        button:nth-of-type(1) {
+            display: none;
+        }
+    }
+}

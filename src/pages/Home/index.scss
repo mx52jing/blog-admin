@@ -13,4 +13,9 @@
     .site-layout-background {
         background: #fff;
     }
+    .logo {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }

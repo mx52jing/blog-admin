@@ -19,9 +19,8 @@ const TagItem = ({ name, _id, fetchCategory }) => {
 		}
 		updateData(
 			`/categories/${_id}`,
-			{ name: categoryVal }
+			{ name: categoryVal.trim() }
 		).then(res => {
-			message.success(res.result)
 			handleShowEditModal(false)
 			fetchCategory && fetchCategory()
 		}).catch(err => {

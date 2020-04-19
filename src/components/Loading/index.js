@@ -14,8 +14,7 @@ const LoadingComp = props => {
 const Loading = {},
 	defaultOptions = {
 		size: 'large',
-		tip: '',
-		delay: 500
+		tip: ''
 	},
 	el = document.createElement('div')
 

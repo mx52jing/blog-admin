@@ -23,7 +23,6 @@ const Category = () => {
 		}
 		postData('/categories', { name: categoryName })
 			.then(({ result }) => {
-                message.success(result)
 				handleCategoryName('')
 				fetchCategory()
 			})

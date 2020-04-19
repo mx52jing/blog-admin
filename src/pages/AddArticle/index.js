@@ -1,16 +1,38 @@
-import React, { memo, useCallback, useState } from 'react'
-import { Row, Col, Input, Form, Button, message } from 'antd'
+import React, { memo, useCallback, useState, useEffect } from 'react'
+import { useRouteMatch, useHistory } from 'react-router-dom'
+import { Row, Col, Input, Form, Button } from 'antd'
 import MarkdownTpl from '@components/MarkdownTpl'
 import MuiSelect from '@components/MuiSelect'
-import { postData } from "@api/request";
+import { postData, getData, updateData } from "@api/request";
 
 import './index.scss'
 
 const { Item } = Form,
 	{ TextArea } = Input
 
-const AddArticle = ({ resetFields }) => {
+const AddArticle = () => {
+	const [form] = Form.useForm(),
+		{ resetFields, setFieldsValue } = form,
+		history = useHistory(),
+		{ params } = useRouteMatch(),
+		isEdit = !!params.id && +params.id !== 0
 	const [articleContent, setArticleContent] = useState('')
+	useEffect(() => {
+		const { id } = params
+		if (isEdit) {
+			getData(`/articles/${id}`)
+				.then(res => {
+					const { result = {} } = res,
+						{ title, category, content } = result
+					setFieldsValue && setFieldsValue({ title, category, content })
+					setArticleContent(content)
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		}
+	}, [])
+	/* 提交表单数据 */
 	const onFinish = useCallback(values => {
 		const {
 				title,
@@ -21,28 +43,38 @@ const AddArticle = ({ resetFields }) => {
 				title,
 				category,
 				content
-			}
-		postData('/articles', data)
+			},
+			{ id } = params,
+			postFn = isEdit ?
+				updateData(`/articles/${id}`, data) :
+				postData('/articles', data)
+		postFn
 			.then(res => {
-                message.success(res.result)
 				resetFields && resetFields()
+                setArticleContent('')
+				isEdit && history.replace('/adming/articleList')
 			})
 			.catch(err => {
 				console.log(err);
 			})
 	}, [])
+	/* 文章内容变化函数 */
 	const handleTextAreaChange = useCallback(event => {
 		setArticleContent(event.target.value)
 	}, [])
 	return (
 		<div className="add-article-wrapper">
 			<Form
+				form={form}
 				onFinish={onFinish}>
 				<Row>
 					<Col span={11}>
 						<Item
 							name='title'
-							rules={[{ required: true, message: '请输入文章标题' }]}>
+							rules={[{
+								required: true,
+								message: '请输入文章标题'
+							}]}>
 							<Input
 								size='large'
 								placeholder="请输入文章标题"/>
