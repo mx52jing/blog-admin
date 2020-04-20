@@ -24,6 +24,7 @@ const Login = props => {
 			.catch(err => {
 				console.log(err);
 			})
+		// eslint-disable-next-line
 	}, [])
 
 	return (

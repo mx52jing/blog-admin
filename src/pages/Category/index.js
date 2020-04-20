@@ -10,6 +10,7 @@ const Category = () => {
 		[categoryName, handleCategoryName] = useState('')
     useEffect(() => {
 		fetchCategory()
+		// eslint-disable-next-line
     }, [])
 	/* input change 事件 */
 	const handleChange = useCallback((event) => {
@@ -29,6 +30,7 @@ const Category = () => {
 			.catch(err => {
 				console.log(err);
 			})
+		// eslint-disable-next-line
 	}, [categoryName])
     /* 请求分类数据 */
     const fetchCategory = useCallback(() => {

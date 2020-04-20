@@ -21,6 +21,7 @@ const MuiSelect = props => {
 		if (open && isAsync && !!apiUrl) {
 			getOptionData()
 		}
+		// eslint-disable-next-line
 	}, [])
 	const getOptionData = useCallback(() => {
 		getData(apiUrl, apiParams, requestOpt)
@@ -31,6 +32,7 @@ const MuiSelect = props => {
 			.catch(err => {
 				console.log(err);
 			})
+		// eslint-disable-next-line
 	}, [])
 	return (
 		<Select

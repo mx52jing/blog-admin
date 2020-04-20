@@ -67,6 +67,7 @@ const ArticleList = () => {
     ]
     useEffect(() => {
         fetchArticleList()
+		// eslint-disable-next-line
     }, [])
     /* 请求文章列表 */
     const fetchArticleList = useCallback(() => {
@@ -98,6 +99,7 @@ const ArticleList = () => {
                     })
             }
         })
+		// eslint-disable-next-line
     }, [])
     /* 预览文章 */
     const handlePreview = useCallback(record => {
@@ -109,6 +111,7 @@ const ArticleList = () => {
             centered: true,
             content: <MarkdownTpl content={content}/>
         })
+		// eslint-disable-next-line
     }, [])
     /* 分页 */
     const handlePageChange = useCallback((page, pageSize) => {
@@ -128,6 +131,7 @@ const ArticleList = () => {
                 columns={columns}
                 dataSource={data}
                 pagination={{
+					hideOnSinglePage: true,
                     total,
                     current: page,
                     pageSize: 10,

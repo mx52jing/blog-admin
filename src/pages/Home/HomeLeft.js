@@ -21,6 +21,7 @@ const HomeLfet = () => {
 	}, [])
 	const handleClick = useCallback(({ item, key }) => {
 		history.push(key)
+		// eslint-disable-next-line
 	}, [])
 	return (
 		<Sider

@@ -1,35 +1,56 @@
-/* 代码块高亮 */
-pre {
-    position: relative;
-    margin-bottom: 24px;
-    border-radius: 3px;
-    border: 1px solid #C3CCD0;
-    background: #FFF;
-    overflow: hidden;
-}
+.markdown-content {
+    h1 {
+        font-size: 30px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h3 {
+        font-size: 24px;
+    }
+    strong {
+        font-weight: 700;
+    }
+    img {
+        border-radius: 5px;
+        border: 1px solid #f3f3f3;
+    }
+    /* 代码块高亮 */
+    pre {
+        display: block;
+        background-color: #283646;
+        padding: 15px;
+        overflow-y: auto;
+        font-weight: 300;
+        font-family: Menlo, monospace;
+        border-radius: 5px;
+    }
 
-code {
-    display: block;
-    padding: 12px 24px;
-    overflow-y: auto;
-    font-weight: 300;
-    font-family: Menlo, monospace;
-    &.has-numbering {
-        margin-left: 21px;
+    pre > code {
+        border: 0;
+        background-color: #283646;
+        color: #FFF;
+        font-size: 18px;
+    }
+
+    code {
+        display: inline-block;
+        background-color: #fff5f5;
+        border: 1px solid #f5f5f5;
+        border-radius: 3px;
+        font-size: 12px;
+        padding-left: 5px;
+        padding-right: 5px;
+        color: #ff502c;
+        margin: 0px 3px;
+    }
+    blockquote {
+        border-left: 4px solid #cbcbcb;
+        padding: 10px 10px 10px 30px;
+        background-color: #f8f8f8;
+        p {
+            margin-bottom: 0;
+        }
     }
 }
 
-.pre-numbering {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 20px;
-    padding: 12px 2px 12px 0;
-    border-right: 1px solid #C3CCD0;
-    border-radius: 3px 0 0 3px;
-    background-color: #EEE;
-    text-align: right;
-    font-family: Menlo, monospace;
-    font-size: 0.8em;
-    color: #AAA;
-}

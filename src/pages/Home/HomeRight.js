@@ -17,6 +17,7 @@ const HomeRight = () => {
 	const handleLogOut = useCallback(() => {
 		localStorage.setItem('token', null)
         history.replace('/login')
+		// eslint-disable-next-line
 	}, [])
 	return (
 		<Layout className="site-layout">

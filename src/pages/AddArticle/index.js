@@ -31,6 +31,7 @@ const AddArticle = () => {
 					console.log(err);
 				})
 		}
+		// eslint-disable-next-line
 	}, [])
 	/* 提交表单数据 */
 	const onFinish = useCallback(values => {
@@ -57,10 +58,12 @@ const AddArticle = () => {
 			.catch(err => {
 				console.log(err);
 			})
+		// eslint-disable-next-line
 	}, [])
 	/* 文章内容变化函数 */
 	const handleTextAreaChange = useCallback(event => {
 		setArticleContent(event.target.value)
+		// eslint-disable-next-line
 	}, [])
 	return (
 		<div className="add-article-wrapper">

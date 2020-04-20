@@ -26,6 +26,7 @@ const TagItem = ({ name, _id, fetchCategory }) => {
 		}).catch(err => {
 			console.log(err);
 		})
+		// eslint-disable-next-line
 	}, [categoryVal])
 	const handleDelete = useCallback(() => {
 		deleteData(`/categories/${_id}`)
@@ -36,6 +37,7 @@ const TagItem = ({ name, _id, fetchCategory }) => {
 			.catch(err => {
 				console.log(err);
 			})
+		// eslint-disable-next-line
 	}, [])
 	return (
 		<>
