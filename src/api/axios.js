@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd'
 import Loading from '@components/Loading'
+import history from '../App/history'
 
 const options = {
 		baseURL: 'http://127.0.0.1:3002/admin',
@@ -45,9 +46,9 @@ export default function (opt = {}) {
 			if(!!err_msg) {
 				message.error(err_msg)
 			}
-			console.log(err_no);
 			if(+err_no === 401) {
-				// history.replace('/login')
+                history.replace('/login')
+                return Promise.reject('token无效，需要重新登录')
 			}
 			return data
 		},
