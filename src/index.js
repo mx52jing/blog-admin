@@ -6,9 +6,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <ConfigProvider locale={zhCN}>
-        <App/>
-    </ConfigProvider>,
+    <React.StrictMode>
+        <ConfigProvider locale={zhCN}>
+            <App/>
+        </ConfigProvider>
+    </React.StrictMode>,
     document.getElementById('root')
 );
 
