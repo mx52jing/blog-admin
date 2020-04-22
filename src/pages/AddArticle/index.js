@@ -23,8 +23,8 @@ const AddArticle = () => {
 			getData(`/articles/${id}`)
 				.then(res => {
 					const { result = {} } = res,
-						{ title, category, content } = result
-					setFieldsValue && setFieldsValue({ title, category, content })
+						{ title, category, content, introduction } = result
+					setFieldsValue && setFieldsValue({ title, category, content, introduction })
 					setArticleContent(content)
 				})
 				.catch(err => {
@@ -39,11 +39,13 @@ const AddArticle = () => {
 				title,
 				category,
 				content,
+				introduction
 			} = values,
 			data = {
 				title,
 				category,
-				content
+				content,
+                introduction
 			},
 			{ id } = params,
 			postFn = isEdit ?
@@ -97,6 +99,17 @@ const AddArticle = () => {
 								size='large'/>
 						</Item>
 					</Col>
+				</Row>
+				<Row>
+                    <Col span={24}>
+                        <Item
+                            name='introduction'
+                            rules={[{ required: true, message: '请输入文章简介' }]}>
+							<TextArea
+                                placeholder='请输入文章简介'
+                                autoSize={{ minRows: 3, maxRows: 3 }}/>
+                        </Item>
+                    </Col>
 				</Row>
 				<Row>
 					<Col span={11}>

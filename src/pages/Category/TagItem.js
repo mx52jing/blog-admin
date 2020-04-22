@@ -31,7 +31,6 @@ const TagItem = ({ name, _id, fetchCategory }) => {
 	const handleDelete = useCallback(() => {
 		deleteData(`/categories/${_id}`)
 			.then(({ result }) => {
-				message.success(result)
 				fetchCategory && fetchCategory()
 			})
 			.catch(err => {

@@ -10,7 +10,9 @@ import './index.scss'
 const ArticleList = () => {
     const history = useHistory()
     const [articleData, setArticleData] = useState({}),
-        { data = [], total = 0, page } = articleData
+        [selectRowIds, setSelectRows] = useState([]),
+        { data = [], total = 0, page } = articleData,
+        len = selectRowIds.length
     const columns = [
         {
             title: '标题',
@@ -36,6 +38,10 @@ const ArticleList = () => {
             render(text, record, index) {
                 return <span>{dateFormat(text, 'yyyy-MM-dd hh:mm')}</span>
             }
+        },
+        {
+            title: '浏览量',
+            dataIndex: 'pv'
         },
         {
             title: '操作',
@@ -83,15 +89,18 @@ const ArticleList = () => {
     /* 删除文章 */
     const handleDelete = useCallback(id => {
         if (!id) return
+        const postId = !!selectRowIds.length ? selectRowIds[0] : id
+        console.log(selectRowIds);
         Modal.confirm({
             className: 'article-modal__delete',
             width: 300,
-            title: '确定要删除这篇文章吗',
+            title: '确定要删除所选吗',
             centered: true,
             onOk(close) {
-                deleteData(`/articles/${id}`)
+                deleteData(`/articles/${postId}`, { ids: selectRowIds.slice(1) })
                     .then(() => {
                         fetchArticleList()
+                        setSelectRows([])
                         close()
                     })
                     .catch(err => {
@@ -100,7 +109,7 @@ const ArticleList = () => {
             }
         })
 		// eslint-disable-next-line
-    }, [])
+    }, [selectRowIds])
     /* 预览文章 */
     const handlePreview = useCallback(record => {
         const { content } = record
@@ -124,8 +133,23 @@ const ArticleList = () => {
                 console.log(err);
             })
     }, [])
+    /* 多选 */
+    const onSelectChange = useCallback(selectedRowKeys => {
+        setSelectRows(selectedRowKeys)
+    }, [])
     return (
         <div className="article-list-wrapper">
+            <div className="table-btns">
+                <Button
+                    onClick={handleDelete}
+                    type="primary"
+                    disabled={!len}
+                    danger
+                >
+                    批量删除
+                </Button>
+                {!!len && <span>选择了{len}条数据</span>}
+            </div>
             <Table
                 rowKey="_id"
                 columns={columns}
@@ -137,6 +161,10 @@ const ArticleList = () => {
                     pageSize: 10,
                     position: ['bottomCenter'],
                     onChange: handlePageChange
+                }}
+                rowSelection={{
+                    selectedRowKeys: selectRowIds,
+                    onChange: onSelectChange
                 }}
             />
         </div>
