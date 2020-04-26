@@ -3,8 +3,9 @@ import { message } from 'antd'
 import Loading from '@components/Loading'
 import history from '../App/history'
 
-const options = {
-		baseURL: 'http://127.0.0.1:3002/admin',
+const url = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3002/admin' : '/api',
+	options = {
+		baseURL: url,
 		timeout: 6000,
 		withCredentials: true
 	},
