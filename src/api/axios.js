@@ -13,7 +13,6 @@ const url = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:3002/api/
 		isLoading: true
 	}
 
-
 export default function (opt = {}) {
 	opt = Object.assign({}, requestOpt, opt)
 	const { isLoading } = opt,
