@@ -1,24 +1,26 @@
 .category-wrapper {
     height: 100%;
-    .add-wrapper {
-        display: flex;
-        .ant-input {
-            flex: 0 0 300px;
-            margin-right: 5px;
-        }
-    }
     .category-content {
-        padding-top: 30px;
         .ant-tag {
-            margin: 0 15px 15px 0;
-            padding: 6px 8px;
             cursor: pointer;
         }
         .category-name {
             margin-right: 5px;
         }
+        .table-btns {
+            margin-bottom: 15px;
+            button {
+                margin-right: 15px;
+            }
+        }
+        .operation-btns {
+            button:nth-of-type(1) {
+                margin-right: 20px;
+            }
+        }
     }
 }
+
 .category-edit-modal {
     .ant-modal-body {
         display: flex;
@@ -27,5 +29,22 @@
     }
     .ant-modal-footer {
         text-align: center;
+    }
+}
+
+.category-dialog__edit {
+    .ant-form {
+        padding-top: 10px;
+    }
+    .ant-modal-body {
+        padding-bottom: 1px;
+    }
+    .ant-form-item-control-input-content {
+        display: flex;
+        justify-content: center;
+        padding-top: 10px;
+        button:nth-of-type(1) {
+            margin-right: 15px;
+        }
     }
 }
