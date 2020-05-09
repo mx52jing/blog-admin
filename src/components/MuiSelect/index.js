@@ -26,8 +26,21 @@ const MuiSelect = props => {
 	const getOptionData = useCallback(() => {
 		getData(apiUrl, apiParams, requestOpt)
 			.then(res => {
-				const data = res[responseDataKey]
-				handleOptions(data)
+			    let data = []
+				if(responseDataKey.includes('.')) {
+					const keys = responseDataKey.split('.')
+                    let copyData = res
+                    for(let key of keys) {
+                        if(!!copyData[key]) {
+                            copyData = copyData[key]
+                        }
+                    }
+                    data = copyData
+                }else {
+					data = res[responseDataKey]
+                }
+                console.log(data);
+                handleOptions(data)
 			})
 			.catch(err => {
 				console.log(err);
@@ -56,7 +69,7 @@ MuiSelect.defaultProps = {
 	optionData: [], // 下拉数据数组
 	apiUrl: null, // 下拉请求路径
 	apiParams: {}, // 下拉请求参数
-	responseDataKey: 'result', // 获取数据的字段
+	responseDataKey: 'result.data', // 获取数据的字段
 	labelKey: 'name', // 下拉展示的字段key
 	requestOpt: {},
 	notFoundContent: <Spin size="small" />
