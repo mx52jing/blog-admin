@@ -32,7 +32,7 @@ const Category = () => {
 					<div className="operation-btns">
 						<Button
 							type='primary'
-							onClick={() => handleEdit(record)}>
+							onClick={() => handleEdit(record, true)}>
 							编辑
 						</Button>
 						<Button
@@ -61,11 +61,12 @@ const Category = () => {
 			})
 	}, [])
 	/* 编辑分类 */
-	const handleEdit = useCallback(data => {
+	const handleEdit = useCallback((data, isEdit = false) => {
 		const el = (
 			<CategoryEdit
 				fetchCategoryData={fetchCategoryData}
 				onCancel={handleCancel}
+				isEdit={isEdit}
 				data={data}/>
 		)
 		setDialogConfig({

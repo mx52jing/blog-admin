@@ -39,7 +39,6 @@ const MuiSelect = props => {
                 }else {
 					data = res[responseDataKey]
                 }
-                console.log(data);
                 handleOptions(data)
 			})
 			.catch(err => {

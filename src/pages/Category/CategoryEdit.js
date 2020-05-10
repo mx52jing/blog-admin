@@ -1,21 +1,20 @@
 import React, { memo, useCallback } from 'react'
 import { Form, Input, Button } from 'antd'
-import { updateData } from '@api/request'
+import { updateData, postData } from '@api/request'
 
 const { Item } = Form
 
-const CategoryEdit = ({ data, onCancel, fetchCategoryData }) => {
+const CategoryEdit = ({ data, onCancel, fetchCategoryData, isEdit }) => {
 	const { name, _id } = data
 	const onFinish = useCallback(value => {
-		updateData(`/categories/${_id}`, value)
-			.then(({ err_no }) => {
-				if (+err_no === 1) return
-				fetchCategoryData && fetchCategoryData()
-				onCancel && onCancel()
-			})
-			.catch(err => {
-				console.log(err);
-			})
+		const fetch = isEdit ? updateData(`/categories/${_id}`, value) : postData('/categories', value)
+		fetch.then(({ err_no }) => {
+			if (+err_no === 1) return
+			fetchCategoryData && fetchCategoryData()
+			onCancel && onCancel()
+		}).catch(err => {
+			console.log(err);
+		})
 	}, [])
 	return (
 		<Form
