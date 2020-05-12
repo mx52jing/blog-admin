@@ -56,5 +56,34 @@
     li {
         list-style: disc;
     }
+    table {
+        font-size: 14px;
+        width: 100%;
+        max-width: 100%;
+        overflow: auto;
+        border: 1px solid #f6f6f6;
+        border-collapse: collapse;
+        border-spacing: 0;
+        thead {
+            background: #f6f6f6;
+            color: #000;
+        }
+        th, td {
+            padding: 6px 8px;
+        }
+        th {
+            &[align='center'] {
+                text-align: center;
+            }
+            &[align='right'] {
+                text-align: right;
+            }
+        }
+        tr {
+            &:nth-child(2n) {
+                background-color: #f7f7f7;
+            }
+        }
+    }
 }
 
