@@ -39,13 +39,15 @@ const AddArticle = () => {
 				title,
 				category,
 				content,
-				introduction
+				introduction,
+				isPublished = true
 			} = values,
 			data = {
 				title,
 				category,
 				content,
-                introduction
+                introduction,
+                isPublished
 			},
 			{ id } = params,
 			postFn = isEdit ?
@@ -67,7 +69,12 @@ const AddArticle = () => {
 		setArticleContent(event.target.value)
 		// eslint-disable-next-line
 	}, [])
-	return (
+    /* 存为草稿 */
+	const handleSaveDarft = useCallback(() => {
+        const data = form.getFieldsValue()
+        onFinish({ ...data, isPublished: false })
+    }, [])
+    return (
 		<div className="add-article-wrapper">
 			<Form
 				form={form}
@@ -129,6 +136,21 @@ const AddArticle = () => {
 					</Col>
 				</Row>
 				<Row>
+					{
+						!isEdit ? (
+                            <Item>
+                                <Button
+									className='draft-btn'
+									size='large'
+									type="primary"
+									danger
+									onClick={handleSaveDarft}
+								>
+                                    存为草稿
+                                </Button>
+                            </Item>
+						) : null
+					}
 					<Item>
 						<Button size='large' type="primary" htmlType="submit">
 							发表文章
