@@ -71,8 +71,13 @@ const AddArticle = () => {
 	}, [])
     /* 存为草稿 */
 	const handleSaveDarft = useCallback(() => {
-        const data = form.getFieldsValue()
-        onFinish({ ...data, isPublished: false })
+		form.validateFields()
+			.then(values => {
+                onFinish({ ...values, isPublished: false })
+			})
+			.catch(err => {
+                console.log(err);
+            })
     }, [])
     return (
 		<div className="add-article-wrapper">
